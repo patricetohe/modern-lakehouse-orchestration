@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.DS_Store
+target/
+dbt_packages/
+logs/
+airflow.db
+.env

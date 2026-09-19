@@ -1,0 +1,13 @@
+# Local dev stack: Postgres for Airflow metadata + dbt target.
+# Airflow webserver/scheduler services to be added as the roadmap progresses.
+version: "3.8"
+services:
+  postgres:
+    image: postgres:16
+    container_name: lakehouse_postgres
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+      - "5432:5432"
