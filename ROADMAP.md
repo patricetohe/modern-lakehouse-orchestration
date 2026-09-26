@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Project skeleton: dbt_project/, dags/, great_expectations/, seeds/
+- [x] Project skeleton: dbt_project/, dags/, great_expectations/, seeds/
 - [ ] Docker Compose: Airflow (LocalExecutor) + Postgres metadata db
 - [ ] Seed raw sample data (CSV) into a staging schema
 - [ ] dbt sources.yml + staging models
