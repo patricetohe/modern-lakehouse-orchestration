@@ -20,3 +20,5 @@
 - [ ] Backfill DAG for historical reprocessing by date range
 - [ ] Architecture README with DAG diagram
 - [ ] Notes: full-refresh vs incremental cost/performance tradeoffs
+
+- [x] GitHub Actions CI: run unit tests on every PR
