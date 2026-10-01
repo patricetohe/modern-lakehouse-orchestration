@@ -1,0 +1,19 @@
+# Local dev profile for the modern_lakehouse dbt project.
+# Point DBT_PROFILES_DIR at this directory (or copy into ~/.dbt/) before
+# running dbt, e.g.:
+#   export DBT_PROFILES_DIR=$(pwd)/dbt_project
+#   dbt debug --project-dir dbt_project
+#
+# Matches the Postgres service defined in docker-compose.yml.
+modern_lakehouse:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('LAKEHOUSE_PG_HOST', 'localhost') }}"
+      port: "{{ env_var('LAKEHOUSE_PG_PORT', '5432') | as_number }}"
+      user: "{{ env_var('LAKEHOUSE_PG_USER', 'airflow') }}"
+      password: "{{ env_var('LAKEHOUSE_PG_PASSWORD', 'airflow') }}"
+      dbname: "{{ env_var('LAKEHOUSE_PG_DB', 'airflow') }}"
+      schema: raw
+      threads: 4

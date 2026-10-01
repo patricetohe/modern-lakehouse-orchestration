@@ -1,0 +1,16 @@
+order_id,customer_id,order_date,status,amount,channel
+1001,C-001,2026-01-05,completed,129.99,web
+1002,C-002,2026-01-06,completed,45.50,mobile
+1003,C-001,2026-01-09,cancelled,89.00,web
+1004,C-003,2026-01-10,completed,215.30,web
+1005,C-004,2026-01-12,completed,12.75,mobile
+1006,C-002,2026-01-14,refunded,45.50,mobile
+1007,C-005,2026-01-15,completed,320.00,web
+1008,C-003,2026-01-18,completed,64.20,web
+1009,C-006,2026-01-20,completed,18.99,mobile
+1010,C-004,2026-01-21,cancelled,99.99,web
+1011,C-007,2026-01-22,completed,142.10,web
+1012,C-005,2026-01-25,completed,58.40,mobile
+1013,C-008,2026-01-27,completed,76.00,web
+1014,C-006,2026-01-28,completed,23.50,mobile
+1015,C-007,2026-01-30,refunded,142.10,web

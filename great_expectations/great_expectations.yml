@@ -1,0 +1,45 @@
+# Skeleton Great Expectations project config for the modern_lakehouse pipeline.
+# Full suites/checkpoints land with the "Great Expectations suite on the
+# staging layer" roadmap item; this file establishes the project structure
+# and the datasource that suite will validate against.
+config_version: 3.0
+
+datasources:
+  lakehouse_postgres:
+    class_name: Datasource
+    execution_engine:
+      class_name: SqlAlchemyExecutionEngine
+      connection_string: "postgresql://${LAKEHOUSE_PG_USER}:${LAKEHOUSE_PG_PASSWORD}@${LAKEHOUSE_PG_HOST}:${LAKEHOUSE_PG_PORT}/${LAKEHOUSE_PG_DB}"
+    data_connectors:
+      default_runtime_data_connector:
+        class_name: RuntimeDataConnector
+        batch_identifiers:
+          - default_identifier_name
+
+config_variables_file_path: uncommitted/config_variables.yml
+
+stores:
+  expectations_store:
+    class_name: ExpectationsStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: expectations/
+
+  validations_store:
+    class_name: ValidationsStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: uncommitted/validations/
+
+  checkpoint_store:
+    class_name: CheckpointStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: checkpoints/
+
+expectations_store_name: expectations_store
+validations_store_name: validations_store
+checkpoint_store_name: checkpoint_store
+
+anonymous_usage_statistics:
+  enabled: false
