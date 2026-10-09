@@ -1,0 +1,9 @@
+customer_id,customer_name,email,signup_date,region
+C-001,Amara Okafor,amara.okafor@example.com,2025-11-02,West
+C-002,Liam Chen,liam.chen@example.com,2025-11-10,East
+C-003,Sofia Rossi,sofia.rossi@example.com,2025-11-15,South
+C-004,Noah Williams,noah.williams@example.com,2025-11-20,West
+C-005,Priya Sharma,priya.sharma@example.com,2025-12-01,North
+C-006,Diego Fernandez,diego.fernandez@example.com,2025-12-05,South
+C-007,Hana Kobayashi,hana.kobayashi@example.com,2025-12-12,East
+C-008,Elijah Brown,elijah.brown@example.com,2025-12-18,North
