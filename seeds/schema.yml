@@ -1,0 +1,69 @@
+version: 2
+
+seeds:
+  - name: raw_orders
+    description: >
+      Raw order events loaded as-is from the source export. One row per
+      order; grain is order_id. Feeds the staging layer (see
+      dbt_project/models/staging) once sources.yml lands.
+    columns:
+      - name: order_id
+        description: Natural key for an order.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Foreign key to raw_customers.customer_id.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('raw_customers')
+              field: customer_id
+      - name: order_date
+        description: Date the order was placed (ISO 8601).
+        tests:
+          - not_null
+      - name: status
+        description: Order lifecycle status.
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['completed', 'cancelled', 'refunded']
+      - name: amount
+        description: Order amount in USD, before refunds/cancellations.
+        tests:
+          - not_null
+      - name: channel
+        description: Sales channel the order was placed through.
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['web', 'mobile']
+
+  - name: raw_customers
+    description: >
+      Raw customer dimension loaded as-is from the source export. One row
+      per customer; grain is customer_id.
+    columns:
+      - name: customer_id
+        description: Natural key for a customer.
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+        description: Customer's full name.
+        tests:
+          - not_null
+      - name: email
+        description: Customer's email address.
+        tests:
+          - unique
+          - not_null
+      - name: signup_date
+        description: Date the customer first signed up (ISO 8601).
+        tests:
+          - not_null
+      - name: region
+        description: Customer's sales region.
+        tests:
+          - not_null
