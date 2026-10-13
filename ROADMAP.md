@@ -3,7 +3,7 @@
 - [x] Project skeleton: dbt_project/, dags/, great_expectations/, seeds/
 - [x] Docker Compose: Airflow (LocalExecutor) + Postgres metadata db
 - [x] Seed raw sample data (CSV) into a staging schema
-- [ ] dbt sources.yml + staging models
+- [x] dbt sources.yml + staging models
 - [ ] dbt intermediate models (joins, deduplication)
 - [ ] dbt mart models (fact/dimension star schema)
 - [ ] dbt tests: unique, not_null, relationships on key models
