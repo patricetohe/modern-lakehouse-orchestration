@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw
+    description: >
+      Raw seed tables loaded as-is from seeds/ via `dbt seed`. Lands in the
+      `raw` schema per the `+schema: raw` config in dbt_project.yml.
+    schema: raw
+    tables:
+      - name: raw_customers
+        description: Raw customer dimension; grain is customer_id.
+      - name: raw_orders
+        description: Raw order events; grain is order_id.

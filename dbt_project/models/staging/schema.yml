@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: >
+      Staged customer dimension. One row per customer_id; column names and
+      types cleaned up from the raw seed (signup_date cast to date).
+    columns:
+      - name: customer_id
+        description: Natural key for a customer.
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+        tests:
+          - not_null
+      - name: email
+        tests:
+          - unique
+          - not_null
+      - name: signup_date
+        tests:
+          - not_null
+      - name: region
+        tests:
+          - not_null
+
+  - name: stg_orders
+    description: >
+      Staged order events. One row per order_id; column names and types
+      cleaned up from the raw seed (order_date cast to date, amount cast to
+      numeric).
+    columns:
+      - name: order_id
+        description: Natural key for an order.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: order_date
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['completed', 'cancelled', 'refunded']
+      - name: amount
+        tests:
+          - not_null
+      - name: channel
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['web', 'mobile']
