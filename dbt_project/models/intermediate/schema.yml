@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: int_orders_deduped
+    description: >
+      Orders deduplicated by order_id, keeping the row with the most
+      recent order_date per id (ties broken arbitrarily). Guards the mart
+      layer against duplicate order rows landing in the raw seed/source.
+    columns:
+      - name: order_id
+        description: Natural key for an order; unique after dedup.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: order_date
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['completed', 'cancelled', 'refunded']
+      - name: amount
+        tests:
+          - not_null
+      - name: channel
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['web', 'mobile']
+
+  - name: int_orders_joined
+    description: >
+      Deduplicated orders (int_orders_deduped) left-joined to stg_customers
+      to attach customer attributes. One row per order_id; grain is
+      unchanged from int_orders_deduped.
+    columns:
+      - name: order_id
+        description: Natural key for an order; unique, one row per order.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: customer_name
+        description: Denormalized from stg_customers via the join.
+        tests:
+          - not_null
+      - name: customer_region
+        description: Denormalized region from stg_customers via the join.
+        tests:
+          - not_null
