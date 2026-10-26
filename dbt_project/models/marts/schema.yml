@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: >
+      Customer dimension for the star schema. One row per customer_id;
+      grain and columns pass through unchanged from stg_customers so the
+      mart layer has a stable, documented customer dimension to join
+      fact tables against.
+    columns:
+      - name: customer_id
+        description: Natural key / surrogate key for the dimension.
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+        tests:
+          - not_null
+      - name: email
+        tests:
+          - unique
+          - not_null
+      - name: signup_date
+        tests:
+          - not_null
+      - name: region
+        tests:
+          - not_null
+
+  - name: fact_orders
+    description: >
+      Order fact table. One row per order_id (deduplicated upstream in
+      int_orders_deduped); customer_id is a foreign key to
+      dim_customers. amount is the measure.
+    columns:
+      - name: order_id
+        description: Natural key for an order; grain of this fact table.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Foreign key to dim_customers.customer_id.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+      - name: order_date
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['completed', 'cancelled', 'refunded']
+      - name: channel
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['web', 'mobile']
+      - name: amount
+        description: Order amount in USD; the primary measure of this fact table.
+        tests:
+          - not_null
