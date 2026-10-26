@@ -5,7 +5,7 @@
 - [x] Seed raw sample data (CSV) into a staging schema
 - [x] dbt sources.yml + staging models
 - [x] dbt intermediate models (joins, deduplication)
-- [ ] dbt mart models (fact/dimension star schema)
+- [x] dbt mart models (fact/dimension star schema)
 - [ ] dbt tests: unique, not_null, relationships on key models
 - [ ] Airflow DAG orchestrating `dbt build` end to end
 - [ ] Great Expectations suite on the staging layer
