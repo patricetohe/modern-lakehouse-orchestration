@@ -6,7 +6,7 @@
 - [x] dbt sources.yml + staging models
 - [x] dbt intermediate models (joins, deduplication)
 - [x] dbt mart models (fact/dimension star schema)
-- [ ] dbt tests: unique, not_null, relationships on key models
+- [x] dbt tests: unique, not_null, relationships on key models
 - [ ] Airflow DAG orchestrating `dbt build` end to end
 - [ ] Great Expectations suite on the staging layer
 - [ ] dbt source freshness checks
