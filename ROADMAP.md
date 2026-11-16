@@ -7,7 +7,7 @@
 - [x] dbt intermediate models (joins, deduplication)
 - [x] dbt mart models (fact/dimension star schema)
 - [x] dbt tests: unique, not_null, relationships on key models
-- [ ] Airflow DAG orchestrating `dbt build` end to end
+- [x] Airflow DAG orchestrating `dbt build` end to end
 - [ ] Great Expectations suite on the staging layer
 - [ ] dbt source freshness checks
 - [ ] Incremental model for the largest fact table
